@@ -1,7 +1,8 @@
 import React from 'react';
+import MainPageLayout from '../Components/MainPageLayout';
 
 function Start() {
-  return <div>this is start</div>;
+  return <MainPageLayout>stated</MainPageLayout>;
 }
 
 export default Start;
