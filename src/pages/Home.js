@@ -1,8 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainPageLayout from '../Components/MainPageLayout';
 
 function Home() {
-  return <MainPageLayout>Home</MainPageLayout>;
+  const [input, setInput] = useState('');
+
+  const onSearch = () => {
+    fetch(`http://api.tvmaze.com/search/shows?q=${input}`)
+      .then(r => r.json())
+      .then(result => {
+        console.log(result);
+      });
+  };
+
+  const onInputChange = ev => {
+    setInput(ev.target.value);
+  };
+  const onKeyDown = ev => {
+    if (ev.keyCode === 13) {
+      onSearch();
+    }
+  };
+  return (
+    <MainPageLayout>
+      <input
+        type="text"
+        onChange={onInputChange}
+        onKeyDown={onKeyDown}
+        value={input}
+      />
+      <button type="button" onClick={onSearch}>
+        Search
+      </button>
+      Home
+    </MainPageLayout>
+  );
 }
 
 export default Home;
