@@ -5,9 +5,12 @@ import apiGet from '../misc/config';
 function Home() {
   const [input, setInput] = useState('');
   const [results, setResults] = useState(null);
+  const [searchOption, setSearchOption] = useState('shows');
+
+  const isShowSearch = searchOption === 'shows';
 
   const onSearch = () => {
-    apiGet(`/search/shows?q=${input}`).then(result => {
+    apiGet(`/search/${searchOption}?q=${input}`).then(result => {
       setResults(result);
     });
   };
@@ -19,34 +22,59 @@ function Home() {
       onSearch();
     }
   };
+  const onRadioChange = ev => {
+    setSearchOption(ev.target.value);
+  };
   const renderResults = () => {
     if (results && results.length === 0) {
       return <div>No Results</div>;
     }
     if (results && results.length > 0) {
-      return (
-        <div>
-          {results.map(item => (
-            <div key={item.show.id}>{item.show.name}</div>
-          ))}
-        </div>
-      );
+      return results[0].show
+        ? results.map(item => <div key={item.show.id}>{item.show.name}</div>)
+        : results.map(item => (
+            <div key={item.person.id}>{item.person.name}</div>
+          ));
     }
     return null;
   };
+
   return (
     <MainPageLayout>
       <input
         type="text"
+        placeholder="Search for something"
         onChange={onInputChange}
-        onKeyDown={onKeyDown}
         value={input}
+        onKeyDown={onKeyDown}
       />
       <button type="button" onClick={onSearch}>
         Search
       </button>
+      <div>
+        <lable htmlFor="shows-search">
+          shows
+          <input
+            id="shows-serach"
+            type="radio"
+            value="shows"
+            onChange={onRadioChange}
+            checked={isShowSearch}
+          />
+        </lable>
+        <label htmlFor="actor-search">
+          <input
+            id="actor-search"
+            type="radio"
+            value="people"
+            onChange={onRadioChange}
+            checked={!isShowSearch}
+          />
+          Actor
+        </label>
+      </div>
+
       {renderResults()}
-      Home
     </MainPageLayout>
   );
 }
