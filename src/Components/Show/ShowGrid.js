@@ -6,7 +6,6 @@ import { FlexGrid } from '../styled';
 function ShowGrid({ data }) {
   return (
     <FlexGrid>
-      {' '}
       {data.map(({ show }) => (
         <ShowCard
           key={show.id}
