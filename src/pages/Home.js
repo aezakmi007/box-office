@@ -63,9 +63,9 @@ function Home() {
           <CustomRadio
             label="Shows"
             id="shows-serach"
-            type="radio"
             value="shows"
             onChange={onRadioChange}
+            checked={isShowSearch}
           />
         </div>
 

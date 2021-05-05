@@ -55,7 +55,7 @@ const RadioWrapper = styled.label`
 
 function CustomRadio({ label, ...restProps }) {
   return (
-    <RadioWrapper htmlFor="shows-search">
+    <RadioWrapper htmlFor={restProps.id}>
       {label}
       <input {...restProps} type="radio" />
       <span />
