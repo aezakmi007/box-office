@@ -10,7 +10,7 @@ function ShowCard({ id, image, name, summary, onStarClick, isStarred }) {
 
   return (
     <StyledShowCard>
-      <div className="img -wrapper">
+      <div className="img-wrapper">
         <img src={image} alt="show" />
       </div>
 
