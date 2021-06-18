@@ -20,7 +20,7 @@ function ShowGrid({ data }) {
         }, [isStarred, show.id]);
 
         return (
-          <ShowCard
+          <ShowCard   
             key={show.id}
             id={show.id}
             name={show.name}
